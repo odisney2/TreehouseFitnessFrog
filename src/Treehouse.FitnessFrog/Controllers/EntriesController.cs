@@ -45,53 +45,26 @@ namespace Treehouse.FitnessFrog.Controllers
         {
             var entry = new Entry()
             {
-                Date = DateTime.Today
+                Date = DateTime.Today,
             };
+
+            ViewBag.ActivitiesSelectListItems = new SelectList(Data.Data.Activities, "Id", "Name");
+
             return View(entry);
         }
         
         [HttpPost]
         public ActionResult Add(Entry entry)
-
-//  the Entry replaced the lower declaraction of the ActionResult
-            
- //        public ActionResult Add(
- //           DateTime? date,
- //           int? activityId,
-  //          double? duration,
-   //         Entry.IntensityLevel? intensity,
-    //        bool? exclude,
-     //       string notes )
-
         {
-            //since using the HTML helper in the Add.cshtml file
-            //ViewBag.Date = ModelState["Date"].Value.AttemptedValue;
-            //ViewBag.ActivityId = ModelState["ActivityId"].Value.AttemptedValue;
-            //ViewBag.Duration = ModelState["Duration"].Value.AttemptedValue;
-            //ViewBag.Intensity = ModelState["Intensity"].Value.AttemptedValue;
-            //ViewBag.Exclude = ModelState["Exclude"].Value.AttemptedValue;
-            //ViewBag.Notes = ModelState["Notes"].Value.AttemptedValue;
-
-            // you could do it like this, but there is a better way to get form field data
-
-            // string date = Request.Form["Date"];
-            // ActivityID
-            // Duration
-            // Intensity
-            // Exclude
-            // Notes
-
-
             if (ModelState.IsValid)
             {
                 _entriesRepository.AddEntry(entry);
-
-                // return View("Index", entries);
 
                 return RedirectToAction("Index");
             }
 
             // TODO Display the Entries list page
+            ViewBag.ActivitiesSelectListItems = new SelectList(Data.Data.Activities, "Id", "Name");
 
             return View(entry);
         }
