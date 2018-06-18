@@ -142,6 +142,7 @@ namespace Treehouse.FitnessFrog.Controllers
             return View(entry);
         }
 
+        [HttpPost]
         public ActionResult Delete (int id)
         {
 
